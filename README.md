@@ -8,7 +8,7 @@ chmod 755 _create_app.sh
 
 2. App launch
 ```bash
-docker compose up -d
+docker-compose up -d
 ```
 
 3. Access
@@ -21,5 +21,5 @@ docker compose up -d
 
 ```bash
 # ログ見れる
-docker compose logs -f
+docker-compose logs -f
 ```

@@ -1,4 +1,4 @@
-## Frow
+## Project App Frow
 
 1. create app
 ```bash
@@ -16,6 +16,11 @@ docker-compose up -d
 
 ## Refarence
 * [【React】Docker Composeで開発環境を構築](https://zenn.dev/chida/articles/51ba4ec06a0724)
+## Start App
+
+```bash
+yarn start PORT=3000
+```
 
 ## 📓 note
 

@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  frontend:
+    platform: linux/amd64
+    build: .
+    image: beauty-parlor-salon-frontend:latest
+    container_name: beauty-parlor-salon-frontend
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./:/usr/src/app
+    command: sh -c "cd app && PORT=3000 yarn start"
+
+    tty: true
+    stdin_open: true

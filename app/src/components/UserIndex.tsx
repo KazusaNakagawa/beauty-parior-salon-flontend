@@ -9,12 +9,9 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from './modules/Title';
-import user from "./pages/user.json" // TODO: レスポンスのJSON
+import User from './models/User'
 
 const url = "http://0.0.0.0:8000"
-
- // 画面に表示するユーザー情報の型
-type USER = typeof user
 
 const options: AxiosRequestConfig = {
   url: `${url}/users`,
@@ -33,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UserIndex() {
   // State処理
-  const [users, setUsers] = useState<USER[]>([])
+  const [users, setUsers] = useState<User[]>([])
   const [status, setStatus] = useState<number | null>(null)
 
   const classes = useStyles();
@@ -45,7 +42,7 @@ export default function UserIndex() {
   // API通信を行う箇所
   useEffect(() => {
     axios(options)
-      .then((res: AxiosResponse<USER[]>) => {
+      .then((res: AxiosResponse<User[]>) => {
         const { data, status } = res
         setUsers(data)
         setStatus(status)

@@ -1,6 +1,5 @@
 // https://zenn.dev/mkt_engr/articles/axios-req-res-typescript
 import React, { useState, useEffect } from "react"
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios"
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 import Table from '@material-ui/core/Table';
@@ -12,11 +11,6 @@ import Title from './modules/Title';
 import User from './models/User'
 
 const url = "http://0.0.0.0:8000"
-
-const options: AxiosRequestConfig = {
-  url: `${url}/users`,
-  method: "GET",
-}
 
 function preventDefault(event: any) {
   event.preventDefault();
@@ -31,27 +25,17 @@ const useStyles = makeStyles((theme) => ({
 export default function UserIndex() {
   // State処理
   const [users, setUsers] = useState<User[]>([])
-  const [status, setStatus] = useState<number | null>(null)
-
-  const classes = useStyles();
-
-  const responseStyle = {
-    color: 'red',
-  }
 
   // API通信を行う箇所
   useEffect(() => {
-    axios(options)
-      .then((res: AxiosResponse<User[]>) => {
-        const { data, status } = res
+    fetch(`${url}/users`, {method: 'GET'})
+      .then(res => res.json())
+      .then(data => {
         setUsers(data)
-        setStatus(status)
       })
-      .catch((e: AxiosError<{ error: string }>) => {
-        // エラー処理
-        console.log(e.message)
-      })
-  }, [])
+  },[])
+
+  const classes = useStyles();
 
   //ユーザー情報を表示する箇所
   return (

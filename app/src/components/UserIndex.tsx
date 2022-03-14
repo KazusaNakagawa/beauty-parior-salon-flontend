@@ -1,4 +1,3 @@
-// https://zenn.dev/mkt_engr/articles/axios-req-res-typescript
 import React, { useState, useEffect } from "react"
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
@@ -27,13 +26,18 @@ export default function UserIndex() {
   const [users, setUsers] = useState<User[]>([])
 
   // API通信を行う箇所
+  // https://www.freecodecamp.org/news/fetch-data-react/
   useEffect(() => {
-    fetch(`${url}/users`, {method: 'GET'})
-      .then(res => res.json())
-      .then(data => {
-        setUsers(data)
-      })
+    getUser()
   },[])
+
+  async function getUser() {
+    await fetch(`${url}/users`, {method: 'GET'})
+    .then(res => res.json())
+    .then(data => {
+      setUsers(data)
+    })
+  }
 
   const classes = useStyles();
 

@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from "react"
-import { makeStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Title from './modules/Title';
+import React, { useState, useEffect } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Link from '@material-ui/core/Link'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Title from './modules/Title'
 import User from './models/User'
 
-const url = "http://0.0.0.0:8000"
+const url = 'http://0.0.0.0:8000'
 
 function preventDefault(event: any) {
-  event.preventDefault();
+  event.preventDefault()
 }
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
     marginTop: theme.spacing(3),
   },
-}));
+}))
 
 export default function UserIndex() {
   // State処理
@@ -29,17 +29,17 @@ export default function UserIndex() {
   // https://www.freecodecamp.org/news/fetch-data-react/
   useEffect(() => {
     getUser()
-  },[])
+  }, [])
 
   async function getUser() {
-    await fetch(`${url}/users`, {method: 'GET'})
-    .then(res => res.json())
-    .then(data => {
-      setUsers(data)
-    })
+    await fetch(`${url}/users`, { method: 'GET' })
+      .then((res) => res.json())
+      .then((data) => {
+        setUsers(data)
+      })
   }
 
-  const classes = useStyles();
+  const classes = useStyles()
 
   //ユーザー情報を表示する箇所
   return (
@@ -54,14 +54,14 @@ export default function UserIndex() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {users.map(({ id, name, email}) => (
+          {users.map(({ id, name, email }) => (
             <TableRow key={id}>
               <TableCell>{id}</TableCell>
               <TableCell>{name}</TableCell>
               <TableCell>{email}</TableCell>
             </TableRow>
           ))}
-       </TableBody>
+        </TableBody>
       </Table>
       <div className={classes.seeMore}>
         <Link color="primary" href="#" onClick={preventDefault}>

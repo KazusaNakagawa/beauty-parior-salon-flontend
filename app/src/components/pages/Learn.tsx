@@ -1,15 +1,14 @@
 /*eslint no-lone-blocks: "error"*/
 /*eslint-env es6*/
 
-import React from 'react';
+import React from 'react'
 
 import './App.css'
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button'
+import ButtonGroup from '@mui/material/ButtonGroup'
+import Stack from '@mui/material/Stack'
 // import Timer from './components/modules/Timer'
 // import Dashboard from './components/modules/Dashboard'
-
 
 function ColorButtons() {
   return (
@@ -22,39 +21,45 @@ function ColorButtons() {
         Error
       </Button>
     </Stack>
-  );
+  )
 }
 
 type MyProps = {
   color: string
 }
-function Custom({color}: MyProps){
-    const users = ["あかね", "いちょう", "うめ", "えり", "おりょう"]
+function Custom({ color }: MyProps) {
+  const users = ['あかね', 'いちょう', 'うめ', 'えり', 'おりょう']
 
-    return (
-      <>
-        <Stack direction="row" spacing={2}>
-          {users.map(user => (
-            <Button variant="outlined" color='secondary' onClick={() => {
-              alert('clicked');
-            }}>
-              🐳 {user} ★
-            </Button>
-          ))}
-        </Stack>
-        <p>Color: {color}</p>
-      </>
-    )
+  return (
+    <>
+      <Stack direction="row" spacing={2}>
+        {users.map((user) => (
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={() => {
+              alert('clicked')
+            }}
+          >
+            🐳 {user} ★
+          </Button>
+        ))}
+      </Stack>
+      <p>Color: {color}</p>
+    </>
+  )
 }
 
 type DogProps = {
   name: string
   owner: string
 }
-function Dog({name, owner}: DogProps) {
+function Dog({ name, owner }: DogProps) {
   return (
     <div>
-      <p>Woof: {name}, Owner: {owner}</p>
+      <p>
+        Woof: {name}, Owner: {owner}
+      </p>
     </div>
   )
 }

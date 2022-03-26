@@ -1,60 +1,45 @@
-// https://zenn.dev/mkt_engr/articles/axios-req-res-typescript
-import React, { useState, useEffect } from "react"
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios"
-import { makeStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Title from './modules/Title';
-import user from "./pages/user.json" // TODO: レスポンスのJSON
+import React, { useState, useEffect } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Link from '@material-ui/core/Link'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Title from './modules/Title'
+import User from './models/User'
 
-const url = "http://0.0.0.0:8000"
-
- // 画面に表示するユーザー情報の型
-type USER = typeof user
-
-const options: AxiosRequestConfig = {
-  url: `${url}/users`,
-  method: "GET",
-}
+const url = 'http://0.0.0.0:8000'
 
 function preventDefault(event: any) {
-  event.preventDefault();
+  event.preventDefault()
 }
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
     marginTop: theme.spacing(3),
   },
-}));
+}))
 
 export default function UserIndex() {
   // State処理
-  const [users, setUsers] = useState<USER[]>([])
-  const [status, setStatus] = useState<number | null>(null)
-
-  const classes = useStyles();
-
-  const responseStyle = {
-    color: 'red',
-  }
+  const [users, setUsers] = useState<User[]>([])
 
   // API通信を行う箇所
+  // https://www.freecodecamp.org/news/fetch-data-react/
   useEffect(() => {
-    axios(options)
-      .then((res: AxiosResponse<USER[]>) => {
-        const { data, status } = res
-        setUsers(data)
-        setStatus(status)
-      })
-      .catch((e: AxiosError<{ error: string }>) => {
-        // エラー処理
-        console.log(e.message)
-      })
+    getUser()
   }, [])
+
+  async function getUser() {
+    await fetch(`${url}/users`, { method: 'GET' })
+      .then((res) => res.json())
+      .then((data) => {
+        setUsers(data)
+      })
+  }
+
+  const classes = useStyles()
 
   //ユーザー情報を表示する箇所
   return (
@@ -69,14 +54,14 @@ export default function UserIndex() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {users.map(({ id, name, email}) => (
+          {users.map(({ id, name, email }) => (
             <TableRow key={id}>
               <TableCell>{id}</TableCell>
               <TableCell>{name}</TableCell>
               <TableCell>{email}</TableCell>
             </TableRow>
           ))}
-       </TableBody>
+        </TableBody>
       </Table>
       <div className={classes.seeMore}>
         <Link color="primary" href="#" onClick={preventDefault}>

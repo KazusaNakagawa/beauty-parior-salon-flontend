@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Dashboard from './components/modules/Dashboard'
 import UserRegst from './components/pages/UserRegstraPage'
-import UserIndex from './components/UserIndex'
+import UserIndex from './components/pages/UserIndex'
 
 function App() {
   return (

@@ -3,7 +3,7 @@ import { Box, Button, TextField, Stack } from '@mui/material'
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
 import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
-import Title from './modules/Title'
+import Title from './Title'
 
 // ref: https://onestepcode.com/creating-a-material-ui-form/
 

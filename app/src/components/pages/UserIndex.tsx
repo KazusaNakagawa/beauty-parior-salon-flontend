@@ -6,9 +6,9 @@ import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
-import Title from './modules/Title'
+import Title from '../modules/Title'
 import { Box } from '@mui/material'
-import User from './models/User'
+import User from '../models/User'
 
 const url = 'http://0.0.0.0:8000'
 

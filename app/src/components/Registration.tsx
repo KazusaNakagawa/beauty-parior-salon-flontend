@@ -15,23 +15,25 @@ const defaultValues = {
   password: '',
 }
 
-// const useStyles = makeStyles({
-//   inputForm: {
-//     alignItems: 'center',
-//   },
-//   registbtn: {
-//     background: 'aliceblue',
-//     border: 0,
-//     borderRadius: 3,
-//     boxShadow: '0 3px 5px 2px aliceblue',
-//     color: '#F0F8FF',
-//     height: 48,
-//     padding: '30px',
-//   },
-// })
+const useStyles = makeStyles({
+  inputForm: {
+    alignItems: 'center',
+    marginBottom: '15px',
+  },
+  registbtn: {
+    background: 'aliceblue',
+    alignItems: 'center',
+    border: 0,
+    borderRadius: 3,
+    boxShadow: '0 3px 5px 2px aliceblue',
+    color: '#F0F8FF',
+    height: 40,
+  },
+})
 
 export default function Registration() {
   const [formValues, setFormValues] = useState(defaultValues)
+  const classes = useStyles()
 
   // 入力のたびに呼ばれる
   const handleInputChange = (event: any) => {
@@ -64,8 +66,6 @@ export default function Registration() {
       })
   }
 
-  // const classes = useStyles();
-
   //ユーザー登録画面
   return (
     <>
@@ -75,6 +75,7 @@ export default function Registration() {
           <React.Fragment>
             <Title>User 登録</Title>
             <Box
+              className={classes.inputForm}
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -111,10 +112,15 @@ export default function Registration() {
                 value={formValues.password}
                 onChange={handleInputChange}
               />
-              <Button variant="contained" color="primary" type="submit">
-                Submit
-              </Button>
             </Box>
+            <Button
+              className={classes.registbtn}
+              variant="contained"
+              color="primary"
+              type="submit"
+            >
+              Submit
+            </Button>
           </React.Fragment>
         </Grid>
       </form>

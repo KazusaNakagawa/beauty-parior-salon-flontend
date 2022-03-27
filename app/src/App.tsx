@@ -11,13 +11,15 @@ import UserIndex from './components/UserIndex'
 function App() {
   return (
     <BrowserRouter>
-      <div>
-        {/* <Dashboard /> */}
+      <>
         <Routes>
-          <Route path="/" element={<UserIndex />} />
-          <Route path="/user-regst" element={<UserRegst />} />
+          <Route path="/" element={<Dashboard name={<UserIndex />} />} />
+          <Route
+            path="/user-regst"
+            element={<Dashboard name={<UserRegst />} />}
+          />
         </Routes>
-      </div>
+      </>
     </BrowserRouter>
   )
 }

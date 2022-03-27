@@ -19,7 +19,14 @@ import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import { mainListItems, secondaryListItems } from './listItems'
-import UserIndex from '../../components/UserIndex'
+
+function MainView(props: any) {
+  return (
+    <>
+      <h2>{props.name}</h2>
+    </>
+  )
+}
 
 function Copyright() {
   return (
@@ -115,8 +122,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Dashboard() {
+export default function Dashboard(props: any) {
   const classes = useStyles()
+  const element = <MainView name={props.name} />
+
   const [open, setOpen] = React.useState(true)
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -179,7 +188,10 @@ export default function Dashboard() {
         <Divider />
       </Drawer>
       <main className={classes.content}>
-        {/* TODO: ここに各種ページ内容を埋め込む */}
+        {/* ここに各種ページ内容を埋め込む */}
+        <Container maxWidth="lg" className={classes.container}>
+          <Box pt={4}>{element}</Box>
+        </Container>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Box pt={4}>

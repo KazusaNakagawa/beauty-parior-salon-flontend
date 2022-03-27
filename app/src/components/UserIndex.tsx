@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Title from './modules/Title'
+import { Box } from '@mui/material'
 import User from './models/User'
 
 const url = 'http://0.0.0.0:8000'
@@ -45,29 +46,41 @@ export default function UserIndex() {
   return (
     <React.Fragment>
       <Title>User Index</Title>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Email</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {users.map(({ id, name, email }) => (
-            <TableRow key={id}>
-              <TableCell>{id}</TableCell>
-              <TableCell>{name}</TableCell>
-              <TableCell>{email}</TableCell>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          p: 2,
+          m: 1,
+          bgcolor: 'background.paper',
+          borderRadius: 1,
+        }}
+      >
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Email</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <div className={classes.seeMore}>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          See more orders
-        </Link>
-      </div>
+          </TableHead>
+          <TableBody>
+            {users.map(({ id, name, email }) => (
+              <TableRow key={id}>
+                <TableCell>{id}</TableCell>
+                <TableCell>{name}</TableCell>
+                <TableCell>{email}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <div className={classes.seeMore}>
+          <Link color="primary" href="#" onClick={preventDefault}>
+            See more orders
+          </Link>
+        </div>
+      </Box>
     </React.Fragment>
   )
 }

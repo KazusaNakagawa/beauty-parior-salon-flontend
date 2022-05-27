@@ -1,4 +1,3 @@
-import * as React from 'react'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -8,12 +7,15 @@ import Checkbox from '@mui/material/Checkbox'
 import Link from '@mui/material/Link'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
-// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import axios from 'axios'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import User from '../models/User'
 
 // ref: https://github.com/mui/material-ui/blob/v5.5.2/docs/data/material/getting-started/templates/sign-in/SignIn.tsx
+
+const url = 'http://0.0.0.0:8000'
 
 function Copyright(props: any) {
   return (
@@ -35,13 +37,36 @@ function Copyright(props: any) {
 
 const theme = createTheme()
 
+
 export default function SignIn() {
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
     const data = new FormData(event.currentTarget)
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+    const name = data.get('name')
+    const password = data.get('password')
+
+    const jsonText = `{"name": "${name}", "password": "${password}"}`
+    const user = JSON.parse(jsonText) as User
+    const formData = new FormData(event.currentTarget)
+
+    formData.append('username', user.name)
+    formData.append('password', user.password)
+
+    axios({
+      method: 'post',
+      url:`${url}/login/access-token`,
+      data: formData
+    })
+    .then(function (res) {
+      alert('Success Login')
+      console.log({data: res.data})
+      console.log({status: res.status})
+    })
+    .catch(function (error) {
+      alert(error)
+      console.log({ errorRes: error.response })
     })
   }
 
@@ -73,10 +98,10 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="name"
+              label="Name"
+              name="name"
+              autoComplete="name"
               autoFocus
             />
             <TextField

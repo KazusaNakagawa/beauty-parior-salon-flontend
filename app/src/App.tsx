@@ -15,8 +15,8 @@ function App() {
     <BrowserRouter>
       <>
         <Routes>
-          <Route path="/sing-in/" element={<SignIn />} />
-          <Route path="/" element={<Dashboard name={<UserIndex />} />} />
+          <Route path="/" element={<SignIn />} />
+          <Route path="/about" element={<Dashboard name={<UserIndex />} />} />
           <Route
             path="/user-regst/"
             element={<Dashboard name={<UserRegst />} />}

@@ -46,7 +46,7 @@ export default function Registration() {
 
   const handleSubmit = (event: any) => {
     event.preventDefault()
-    console.log(formValues)
+    console.log({ formValues: formValues })
 
     // API通信を行う箇所
     const options: AxiosRequestConfig = {
@@ -57,7 +57,7 @@ export default function Registration() {
 
     axios(options)
       .then(function (response) {
-        console.log(response)
+        console.log(response.data)
         // TODO: モーダルに変更する
         alert('登録しました!')
       })

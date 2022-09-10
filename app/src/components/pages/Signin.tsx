@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import User from '../models/User'
+import { useNavigate } from 'react-router-dom'
 
 // ref: https://github.com/mui/material-ui/blob/v5.5.2/docs/data/material/getting-started/templates/sign-in/SignIn.tsx
 
@@ -37,9 +38,8 @@ function Copyright(props: any) {
 
 const theme = createTheme()
 
-
 export default function SignIn() {
-
+  const navigate = useNavigate()
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
@@ -56,18 +56,19 @@ export default function SignIn() {
 
     axios({
       method: 'post',
-      url:`${url}/login/access-token`,
-      data: formData
+      url: `${url}/login/access-token`,
+      data: formData,
     })
-    .then(function (res) {
-      alert('Success Login')
-      console.log({data: res.data})
-      console.log({status: res.status})
-    })
-    .catch(function (error) {
-      alert(error)
-      console.log({ errorRes: error.response })
-    })
+      .then(function (res) {
+        alert('Success Login')
+        console.log({ data: res.data })
+        console.log({ status: res.status })
+        navigate('/about')
+      })
+      .catch(function (error) {
+        alert(error)
+        console.log({ errorRes: error.response })
+      })
   }
 
   return (

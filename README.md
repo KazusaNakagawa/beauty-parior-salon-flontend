@@ -24,7 +24,12 @@ yarn start PORT=3000
 
 ## 📓 note
 
-```bash
-# ログ見れる
-docker-compose logs -f
-```
+- Look log
+  ```bash 
+  docker-compose logs -f
+  ```
+
+- Container Access
+  ```bash
+  docker exec -it beauty-parlor-salon-frontend sh
+  ```

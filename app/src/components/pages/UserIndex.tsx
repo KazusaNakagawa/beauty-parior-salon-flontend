@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import Link from '@material-ui/core/Link'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import Title from '../modules/Title'
-import { Box } from '@mui/material'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Card from '@mui/material/Card'
+import CardActions from '@mui/material/CardActions'
+import CardContent from '@mui/material/CardContent'
+import EmailIcon from '@mui/icons-material/Email'
+import Grid from '@mui/material/Grid'
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
+
 import User from '../models/User'
+import '../../App.css'
 
 const url = 'http://0.0.0.0:8000'
-
-function preventDefault(event: any) {
-  event.preventDefault()
-}
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function UserIndex() {
+export default function BasicCard() {
   // State処理
   const [users, setUsers] = useState<User[]>([])
 
@@ -40,47 +40,46 @@ export default function UserIndex() {
       })
   }
 
-  const classes = useStyles()
-
-  //ユーザー情報を表示する箇所
   return (
-    <React.Fragment>
-      <Title>User Index</Title>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          p: 2,
-          m: 1,
-          bgcolor: 'background.paper',
-          borderRadius: 1,
-        }}
-      >
-        <Table size="small">
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Email</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {users.map(({ id, name, email }) => (
-              <TableRow key={id}>
-                <TableCell>{id}</TableCell>
-                <TableCell>{name}</TableCell>
-                <TableCell>{email}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-        <div className={classes.seeMore}>
-          <Link color="primary" href="#" onClick={preventDefault}>
-            See more orders
-          </Link>
-        </div>
-      </Box>
-    </React.Fragment>
+    <Box sx={{ width: '100%' }}>
+      <Stack spacing={2}>
+        {users.map(({ id, name, email }) => (
+          <Card variant="outlined">
+            <CardContent>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  color="text.secondary"
+                  gutterBottom
+                >
+                  id: {id}
+                </Typography>
+                <hr />
+                <Grid container sx={{ color: 'text.primary' }} spacing={0}>
+                  <Grid item xs={1}>
+                    <Typography>
+                      <AccountCircleIcon />
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={2}>
+                    {name}
+                  </Grid>
+                </Grid>
+                <Grid container sx={{ color: 'text.primary' }} spacing={0}>
+                  <Grid item xs={1}>
+                    <Typography>
+                      <EmailIcon />
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={2}>
+                    {email}
+                  </Grid>
+                </Grid>
+              </Typography>
+            </CardContent>
+          </Card>
+        ))}
+      </Stack>
+    </Box>
   )
 }

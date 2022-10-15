@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function BasicCard() {
+export default function UserIndex() {
   // State処理
   const [users, setUsers] = useState<User[]>([])
 

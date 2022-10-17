@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
-import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import EmailIcon from '@mui/icons-material/Email'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-import Title from '../modules/Title'
-import GridItem from '../modules/GridItem'
-
-import User from '../models/User'
 import '../../App.css'
-
-const url = 'http://0.0.0.0:8000'
+import axios from '../../config/axios'
+import GridItem from '../modules/GridItem'
+import Title from '../modules/Title'
+import User from '../models/User'
 
 export default function UserIndex() {
   // State処理
@@ -23,16 +19,10 @@ export default function UserIndex() {
   // API通信を行う箇所
   // https://www.freecodecamp.org/news/fetch-data-react/
   useEffect(() => {
-    getUser()
+    axios.get(`/users`).then((res) => {
+      setUsers(res.data)
+    })
   }, [])
-
-  async function getUser() {
-    await fetch(`${url}/users`, { method: 'GET' })
-      .then((res) => res.json())
-      .then((data) => {
-        setUsers(data)
-      })
-  }
 
   return (
     <React.Fragment>

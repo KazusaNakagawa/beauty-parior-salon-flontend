@@ -1,23 +1,20 @@
 import Avatar from '@mui/material/Avatar'
-import Button from '@mui/material/Button'
-import CssBaseline from '@mui/material/CssBaseline'
-import TextField from '@mui/material/TextField'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Checkbox from '@mui/material/Checkbox'
-import Link from '@mui/material/Link'
-import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
-import axios from 'axios'
-import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
+import Checkbox from '@mui/material/Checkbox'
 import Container from '@mui/material/Container'
+import CssBaseline from '@mui/material/CssBaseline'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Grid from '@mui/material/Grid'
+import Link from '@mui/material/Link'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import User from '../models/User'
 import { useNavigate } from 'react-router-dom'
+import axios from '../../config/axios'
+import User from '../models/User'
 
 // ref: https://github.com/mui/material-ui/blob/v5.5.2/docs/data/material/getting-started/templates/sign-in/SignIn.tsx
-
-const url = 'http://0.0.0.0:8000'
-
 function Copyright(props: any) {
   return (
     <Typography
@@ -56,7 +53,7 @@ export default function SignIn() {
 
     axios({
       method: 'post',
-      url: `${url}/login/access-token`,
+      url: `/login/access-token`,
       data: formData,
     })
       .then(function (res) {

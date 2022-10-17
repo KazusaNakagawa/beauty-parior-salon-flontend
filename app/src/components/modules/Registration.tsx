@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { Box, Button, TextField, Stack } from '@mui/material'
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
-import { makeStyles } from '@material-ui/core/styles'
+import React, { useState } from 'react'
 import Grid from '@material-ui/core/Grid'
+import { Box, Button, TextField } from '@mui/material'
+import { makeStyles } from '@material-ui/core/styles'
+import { AxiosRequestConfig } from 'axios'
+import axios from '../../config/axios'
 import Title from './Title'
 
 // ref: https://onestepcode.com/creating-a-material-ui-form/
-
-const url = 'http://0.0.0.0:8000'
-
 const defaultValues = {
   name: '',
   email: '',
@@ -50,7 +48,7 @@ export default function Registration() {
 
     // API通信を行う箇所
     const options: AxiosRequestConfig = {
-      url: `${url}/users`,
+      url: `/users`,
       method: 'POST',
       data: formValues,
     }

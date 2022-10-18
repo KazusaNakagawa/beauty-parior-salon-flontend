@@ -25,32 +25,26 @@ export default function UserIndex() {
   }, [])
 
   return (
-    <React.Fragment>
+    <div>
       <Title>User Index</Title>
       <Box sx={{ width: '100%' }}>
         <Stack spacing={2}>
           {users.map(({ id, name, email }) => (
-            <Card variant="outlined">
+            <Card variant="outlined" key={id}>
               <CardContent>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  <Typography
-                    sx={{ fontSize: 14 }}
-                    color="text.secondary"
-                    gutterBottom
-                  >
-                    id: {id}
-                  </Typography>
-                  <hr />
-                  <GridItem
-                    element={{ icon: <AccountCircleIcon />, itemVal: name }}
-                  />
-                  <GridItem element={{ icon: <EmailIcon />, itemVal: email }} />
+                  id: {id}
                 </Typography>
+                  <hr />
+                <GridItem
+                  element={{ icon: <AccountCircleIcon />, itemVal: name, fontSize: 14 }}
+                />
+                <GridItem element={{ icon: <EmailIcon />, itemVal: email, fontSize: 14}} />
               </CardContent>
             </Card>
           ))}
         </Stack>
       </Box>
-    </React.Fragment>
+    </div>
   )
 }

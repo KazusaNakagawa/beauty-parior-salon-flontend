@@ -5,11 +5,22 @@ import '../../App.css'
 
 export default function GridItem(props: any) {
   return (
-    <Grid container sx={{ color: 'text.primary' }} spacing={0}>
+    <Grid container spacing={0}>
       <Grid item xs={1}>
-        <Typography>{props.element.icon}</Typography>
+        <Typography
+          sx={{ fontSize: props.element.fontSize }}
+          color={'text.secondary'}
+          gutterBottom
+        >
+          {props.element.icon}
+        </Typography>
       </Grid>
-      <Grid item xs={2}>
+      <Grid
+        item
+        xs={2}
+        sx={{ fontSize: props.element.fontSize }}
+        color={'text.secondary'}
+      >
         {props.element.itemVal}
       </Grid>
     </Grid>

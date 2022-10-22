@@ -35,7 +35,7 @@ export default function UserIndex() {
       <Stack spacing={2}>
         <Grid container spacing={2}>
           {users.map(({ id, name, email }) => (
-            <Grid item xs={12} lg={4} sm={6} key={id}>
+            <Grid item xs={12} sm={6} lg={4} key={id}>
               <Card sx={{ maxWidth: 345 }} variant="outlined">
                 <CardHeader
                   avatar={<Avatar aria-label="recipe">R</Avatar>}

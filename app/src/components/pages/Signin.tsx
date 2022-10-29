@@ -60,6 +60,11 @@ export default function SignIn() {
         alert('Success Login')
         console.log({ data: res.data })
         console.log({ status: res.status })
+        // https://developer.mozilla.org/ja/docs/Web/API/Window/localStorage
+        const setToken = localStorage.setItem('token', res.data.access_token)
+        console.log(setToken)
+        var getToken = localStorage.getItem('token')
+        console.log(getToken)
         navigate('/about')
       })
       .catch(function (error) {

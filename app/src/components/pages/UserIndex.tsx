@@ -34,7 +34,7 @@ export default function UserIndex() {
       <Title>User Index</Title>
       <Stack spacing={2}>
         <Grid container spacing={2}>
-          {users.map(({ id, name, email }) => (
+          {users.map(({ id, username, email }) => (
             <Grid item xs={12} sm={6} lg={4} key={id}>
               <Card sx={{ maxWidth: 345 }} variant="outlined">
                 <CardHeader
@@ -61,7 +61,7 @@ export default function UserIndex() {
                   <GridItem
                     element={{
                       icon: <AccountCircleIcon />,
-                      itemVal: name,
+                      itemVal: username,
                       fontSize: 14,
                     }}
                   />

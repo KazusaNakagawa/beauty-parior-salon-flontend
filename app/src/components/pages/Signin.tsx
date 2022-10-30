@@ -41,25 +41,30 @@ export default function SignIn() {
     event.preventDefault()
 
     const data = new FormData(event.currentTarget)
-    const name = data.get('name')
+    const username = data.get('username')
     const password = data.get('password')
 
-    const jsonText = `{"name": "${name}", "password": "${password}"}`
+    const jsonText = `{"username": "${username}", "password": "${password}"}`
     const user = JSON.parse(jsonText) as User
     const formData = new FormData(event.currentTarget)
 
-    formData.append('username', user.name)
+    formData.append('username', user.username)
     formData.append('password', user.password)
 
     axios({
       method: 'post',
-      url: `/login/access-token`,
+      url: `/token`,
       data: formData,
     })
       .then(function (res) {
         alert('Success Login')
         console.log({ data: res.data })
         console.log({ status: res.status })
+        // https://developer.mozilla.org/ja/docs/Web/API/Window/localStorage
+        const setToken = localStorage.setItem('token', res.data.access_token)
+        console.log(setToken)
+        var getToken = localStorage.getItem('token')
+        console.log(getToken)
         navigate('/about')
       })
       .catch(function (error) {
@@ -96,10 +101,10 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="name"
-              label="Name"
-              name="name"
-              autoComplete="name"
+              id="username"
+              label="User Name"
+              name="username"
+              autoComplete="username"
               autoFocus
             />
             <TextField

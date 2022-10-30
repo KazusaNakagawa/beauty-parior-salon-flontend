@@ -66,10 +66,10 @@ export default function UserIndex() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {users.map(({ id, name, email }) => (
+            {users.map(({ id, username, email }) => (
               <TableRow key={id}>
                 <TableCell>{id}</TableCell>
-                <TableCell>{name}</TableCell>
+                <TableCell>{username}</TableCell>
                 <TableCell>{email}</TableCell>
               </TableRow>
             ))}

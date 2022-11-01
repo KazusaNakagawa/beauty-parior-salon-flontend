@@ -11,6 +11,7 @@ import IconButton, { IconButtonProps } from '@mui/material/IconButton'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
+import { useNavigate } from 'react-router-dom'
 import '../../App.css'
 import axios from '../../config/axios'
 import GridItem from '../modules/GridItem'
@@ -20,14 +21,33 @@ import User from '../models/User'
 export default function UserIndex() {
   // State処理
   const [users, setUsers] = useState<User[]>([])
+  const navigate = useNavigate()
 
-  // API通信を行う箇所
-  // https://www.freecodecamp.org/news/fetch-data-react/
   useEffect(() => {
-    axios.get(`/users`).then((res) => {
-      setUsers(res.data)
-    })
-  }, [])
+    /*
+      API communication handling
+      Ref: https://www.freecodecamp.org/news/fetch-data-react/
+      
+      curl -X 'GET' \
+        'http://localhost:8000/users/?skip=0&limit=100' \
+        -H 'accept: application/json' \
+        -H 'Authorization: Bearer xxx ...'
+    */
+    const accessToken = localStorage.getItem('token')
+    axios
+      .get(`/users/`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => {
+        setUsers(res.data)
+      })
+      .catch(function (err) {
+        alert(err)
+        navigate('/')
+      })
+  }, [navigate])
 
   return (
     <div>

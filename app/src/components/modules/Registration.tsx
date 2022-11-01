@@ -8,7 +8,7 @@ import Title from './Title'
 
 // ref: https://onestepcode.com/creating-a-material-ui-form/
 const defaultValues = {
-  name: '',
+  username: '',
   email: '',
   password: '',
 }
@@ -48,7 +48,7 @@ export default function Registration() {
 
     // API通信を行う箇所
     const options: AxiosRequestConfig = {
-      url: `/users`,
+      url: `/users/`,
       method: 'POST',
       data: formValues,
     }
@@ -86,10 +86,10 @@ export default function Registration() {
             >
               <TextField
                 id="name-input"
-                name="name"
+                name="username"
                 label="name *"
                 variant="standard"
-                value={formValues.name}
+                value={formValues.username}
                 onChange={handleInputChange}
               />
               <TextField

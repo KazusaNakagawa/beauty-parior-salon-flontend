@@ -68,7 +68,7 @@ export default function Registration() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <Grid container alignItems="center" justify="center" direction="column">
+        <Grid container alignItems="center" justifyContent="center" direction="column">
           {/* <Grid item> */}
           <React.Fragment>
             <Title>User 登録</Title>

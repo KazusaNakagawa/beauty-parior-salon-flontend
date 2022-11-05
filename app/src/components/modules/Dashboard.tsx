@@ -1,23 +1,27 @@
 import React from 'react'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
+import { useNavigate } from 'react-router-dom'
+import AppBar from '@material-ui/core/AppBar'
+import Box from '@material-ui/core/Box'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Drawer from '@material-ui/core/Drawer'
-import Box from '@material-ui/core/Box'
-import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import List from '@material-ui/core/List'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
 import Badge from '@material-ui/core/Badge'
-import Container from '@material-ui/core/Container'
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
-import Link from '@material-ui/core/Link'
-import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import Container from '@material-ui/core/Container'
+import Link from '@material-ui/core/Link'
+import LogoutIcon from '@mui/icons-material/Logout'
+import Menu from '@mui/material/Menu'
+import MenuIcon from '@material-ui/icons/Menu'
+import MenuItem from '@mui/material/MenuItem'
 import NotificationsIcon from '@material-ui/icons/Notifications'
+import SettingsIcon from '@mui/icons-material/Settings'
+// My modules
 import { mainListItems, secondaryListItems } from './listItems'
 
 function MainView(props: any) {
@@ -124,7 +128,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard(props: any) {
   const classes = useStyles()
+  const navigate = useNavigate()
   const element = <MainView name={props.name} />
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  const logOut = () => {
+    localStorage.removeItem('token')
+    navigate('/')
+  }
 
   const [open, setOpen] = React.useState(true)
   const handleDrawerOpen = () => {
@@ -165,10 +184,35 @@ export default function Dashboard(props: any) {
             Dashboard
           </Typography>
           <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
+            <Badge badgeContent={5} color="secondary">
               <NotificationsIcon />
             </Badge>
           </IconButton>
+          <IconButton color="inherit" onClick={handleMenu}>
+            <SettingsIcon />
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            {/* TODO: Log Out のみ実装した */}
+            <MenuItem onClick={handleClose}>todo: Profile</MenuItem>
+            <MenuItem onClick={handleClose}>todo: My account</MenuItem>
+            <MenuItem onClick={logOut}>
+              <LogoutIcon /> Logout
+            </MenuItem>
+          </Menu>
         </Toolbar>
       </AppBar>
       <Drawer

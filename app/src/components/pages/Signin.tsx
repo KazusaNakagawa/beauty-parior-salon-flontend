@@ -32,6 +32,17 @@ function Copyright(props: any) {
     </Typography>
   )
 }
+/*
+  Ref: 
+    https://www.w3schools.com/js/js_cookies.asp#:~:text=a%20cookie%20value-,A%20Function%20to%20Set%20a%20Cookie,-First%2C%20we%20create
+
+*/
+function setCookie(cname: string, cvalue: string, exdays: number) {
+  const d = new Date()
+  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000)
+  let expires = 'expires=' + d.toUTCString()
+  document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/'
+}
 
 const theme = createTheme()
 
@@ -59,7 +70,8 @@ export default function SignIn() {
       .then(function (res) {
         alert('Success Login')
         // https://developer.mozilla.org/ja/docs/Web/API/Window/localStorage
-        localStorage.setItem('token', res.data.access_token)
+        // localStorage.setItem('token', res.data.access_token)
+        setCookie('auth_token', res.data.access_token, 1)
         navigate('/about')
       })
       .catch(function (error) {

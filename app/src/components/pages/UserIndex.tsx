@@ -23,6 +23,33 @@ export default function UserIndex() {
   const [users, setUsers] = useState<User[]>([])
   const navigate = useNavigate()
 
+  function getCookie(cname: string) {
+    let name = cname + '='
+    let ca = document.cookie.split(';')
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i]
+      while (c.charAt(0) === ' ') {
+        c = c.substring(1)
+      }
+      if (c.indexOf(name) === 0) {
+        return c.substring(name.length, c.length)
+      }
+    }
+    return ''
+  }
+  function checkCookie(cname: string) {
+    let cvalue = getCookie(cname)
+    if (cvalue !== '') {
+      return cvalue
+    } else {
+      let cvalue = prompt('Please enter your name:', '')
+      if (cvalue !== '' && cvalue != null) {
+        alert(`cvalue: ${cvalue}, cname: ${cname}`)
+        // setCookie("username", user, 365);
+      }
+    }
+  }
+
   useEffect(() => {
     /*
       API communication handling
@@ -33,7 +60,8 @@ export default function UserIndex() {
         -H 'accept: application/json' \
         -H 'Authorization: Bearer xxx ...'
     */
-    const accessToken = localStorage.getItem('token')
+    // const accessToken = localStorage.getItem('token')
+    const accessToken = checkCookie('auth_token')
     axios
       .get(`/users/`, {
         headers: {

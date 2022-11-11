@@ -68,11 +68,9 @@ export default function SignIn() {
       data: formData,
     })
       .then(function (res) {
-        alert('Success Login')
-        // https://developer.mozilla.org/ja/docs/Web/API/Window/localStorage
-        // localStorage.setItem('token', res.data.access_token)
-        setCookie('auth_token', res.data.access_token, 1)
+        setCookie('auth_token', res.data.access_token, 0.00006)
         navigate('/about')
+        alert('Success Login')
       })
       .catch(function (error) {
         alert(error)

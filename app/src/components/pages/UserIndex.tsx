@@ -37,16 +37,13 @@ export default function UserIndex() {
     }
     return ''
   }
-  function checkCookie(cname: string) {
+  function checkCookie(cname: string, alert_val: string) {
     let cvalue = getCookie(cname)
     if (cvalue !== '') {
       return cvalue
     } else {
-      let cvalue = prompt('Please enter your name:', '')
-      if (cvalue !== '' && cvalue != null) {
-        alert(`cvalue: ${cvalue}, cname: ${cname}`)
-        // setCookie("username", user, 365);
-      }
+      alert(alert_val)
+      navigate('/about')
     }
   }
 
@@ -60,8 +57,7 @@ export default function UserIndex() {
         -H 'accept: application/json' \
         -H 'Authorization: Bearer xxx ...'
     */
-    // const accessToken = localStorage.getItem('token')
-    const accessToken = checkCookie('auth_token')
+    const accessToken = checkCookie('auth_token', 'Please Again Login')
     axios
       .get(`/users/`, {
         headers: {

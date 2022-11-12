@@ -141,7 +141,7 @@ export default function Dashboard(props: any) {
   }
 
   const logOut = () => {
-    localStorage.removeItem('token')
+    document.cookie = 'auth_token='
     navigate('/')
   }
 

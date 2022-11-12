@@ -17,11 +17,13 @@ import axios from '../../config/axios'
 import GridItem from '../modules/GridItem'
 import Title from '../modules/Title'
 import User from '../models/User'
+import CheckCookie from '../modules/CheckCookie'
 
 export default function UserIndex() {
-  // State処理
   const [users, setUsers] = useState<User[]>([])
+  const checkCookie = CheckCookie()
   const navigate = useNavigate()
+  const accessToken = checkCookie('auth_token', 'Please Again Login', '/about')
 
   useEffect(() => {
     /*
@@ -33,7 +35,6 @@ export default function UserIndex() {
         -H 'accept: application/json' \
         -H 'Authorization: Bearer xxx ...'
     */
-    const accessToken = localStorage.getItem('token')
     axios
       .get(`/users/`, {
         headers: {
@@ -47,7 +48,7 @@ export default function UserIndex() {
         alert(err)
         navigate('/')
       })
-  }, [navigate])
+  }, [accessToken, navigate])
 
   return (
     <div>
@@ -67,6 +68,7 @@ export default function UserIndex() {
                   title="Shrimp and Chorizo Paella"
                   subheader="September 14, 2016"
                 />
+                {/* TODO: hard court image tag */}
                 <CardMedia
                   component="img"
                   height="194"

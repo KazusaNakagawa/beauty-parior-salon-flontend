@@ -13,6 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom'
 import axios from '../../config/axios'
 import User from '../models/User'
+import SetCookie from '../modules/SetCookie'
 
 // ref: https://github.com/mui/material-ui/blob/v5.5.2/docs/data/material/getting-started/templates/sign-in/SignIn.tsx
 function Copyright(props: any) {
@@ -32,11 +33,12 @@ function Copyright(props: any) {
     </Typography>
   )
 }
-
 const theme = createTheme()
 
 export default function SignIn() {
+  const setCookie = SetCookie()
   const navigate = useNavigate()
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
@@ -57,10 +59,9 @@ export default function SignIn() {
       data: formData,
     })
       .then(function (res) {
-        alert('Success Login')
-        // https://developer.mozilla.org/ja/docs/Web/API/Window/localStorage
-        localStorage.setItem('token', res.data.access_token)
+        setCookie('auth_token', res.data.access_token, 1)
         navigate('/about')
+        alert('Success Login')
       })
       .catch(function (error) {
         alert(error)

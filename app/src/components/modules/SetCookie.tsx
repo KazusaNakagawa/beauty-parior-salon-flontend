@@ -7,7 +7,6 @@ export default function SetCookie() {
      cname(str) : Cookie Name 
      cvalue(str): Cookie Value
      exdays(str): Cookie Expire / Max-Age
-    
   */
   function setCookie(cname: string, cvalue: string, exdays: number) {
     const d = new Date()

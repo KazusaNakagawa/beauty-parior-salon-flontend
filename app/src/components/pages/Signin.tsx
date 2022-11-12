@@ -13,6 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom'
 import axios from '../../config/axios'
 import User from '../models/User'
+import SetCookie from '../modules/SetCookie'
 
 // ref: https://github.com/mui/material-ui/blob/v5.5.2/docs/data/material/getting-started/templates/sign-in/SignIn.tsx
 function Copyright(props: any) {
@@ -32,22 +33,12 @@ function Copyright(props: any) {
     </Typography>
   )
 }
-/*
-  Ref: 
-    https://www.w3schools.com/js/js_cookies.asp#:~:text=a%20cookie%20value-,A%20Function%20to%20Set%20a%20Cookie,-First%2C%20we%20create
-
-*/
-function setCookie(cname: string, cvalue: string, exdays: number) {
-  const d = new Date()
-  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000)
-  let expires = 'expires=' + d.toUTCString()
-  document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/'
-}
-
 const theme = createTheme()
 
 export default function SignIn() {
+  const setCookie = SetCookie()
   const navigate = useNavigate()
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 

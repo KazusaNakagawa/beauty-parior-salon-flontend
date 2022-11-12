@@ -59,7 +59,7 @@ export default function SignIn() {
       data: formData,
     })
       .then(function (res) {
-        setCookie('auth_token', res.data.access_token, 0.00006)
+        setCookie('auth_token', res.data.access_token, 1)
         navigate('/about')
         alert('Success Login')
       })

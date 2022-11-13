@@ -141,7 +141,11 @@ export default function Dashboard(props: any) {
   }
 
   const logOut = () => {
-    document.cookie = 'auth_token='
+    /**
+     * TODO: After log out,  /user-regist/.
+     *  Specify the root path
+     */
+    document.cookie = 'auth_token=; path=/'
     navigate('/')
   }
 

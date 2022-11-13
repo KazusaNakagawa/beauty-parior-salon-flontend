@@ -21,14 +21,6 @@ export const mainListItems = (
         <ListItemText primary="Dashboard" />
       </ListItem>
     </Link>
-    <Link to="/user-regst">
-      <ListItem button>
-        <ListItemIcon>
-          <PeopleIcon />
-        </ListItemIcon>
-        <ListItemText primary="UserRestration" />
-      </ListItem>
-    </Link>
   </div>
 )
 

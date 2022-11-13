@@ -5,7 +5,7 @@ import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Dashboard from './components/modules/Dashboard'
 import SignIn from './components/pages/Signin'
-import UserRegst from './components/pages/UserRegstraPage'
+import UserRegst from './components/pages/UserRegst'
 import UserIndex from './components/pages/UserIndex'
 
 function App() {
@@ -15,10 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/about" element={<Dashboard name={<UserIndex />} />} />
-          <Route
-            path="/user-regst/"
-            element={<Dashboard name={<UserRegst />} />}
-          />
+          <Route path="/user-regst/" element={<UserRegst />} />
         </Routes>
       </>
     </BrowserRouter>

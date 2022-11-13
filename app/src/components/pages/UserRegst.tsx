@@ -1,21 +1,20 @@
+import React, { useState } from 'react'
+import { Box, Button, TextField } from '@mui/material'
+import { AxiosRequestConfig } from 'axios'
+import axios from '../../config/axios'
 import Avatar from '@mui/material/Avatar'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import Checkbox from '@mui/material/Checkbox'
 import Container from '@mui/material/Container'
 import CssBaseline from '@mui/material/CssBaseline'
-import FormControlLabel from '@mui/material/FormControlLabel'
 import Grid from '@mui/material/Grid'
+import FormControlLabel from '@mui/material/FormControlLabel'
 import Link from '@mui/material/Link'
-import TextField from '@mui/material/TextField'
+// import {Link} from "react-router-dom";
 import Typography from '@mui/material/Typography'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom'
-import axios from '../../config/axios'
 import User from '../models/User'
-import SetCookie from '../modules/SetCookie'
 
-// ref: https://github.com/mui/material-ui/blob/v5.5.2/docs/data/material/getting-started/templates/sign-in/SignIn.tsx
 function Copyright(props: any) {
   return (
     <Typography
@@ -33,10 +32,10 @@ function Copyright(props: any) {
     </Typography>
   )
 }
+
 const theme = createTheme()
 
-export default function SignIn() {
-  const setCookie = SetCookie()
+export default function Registration() {
   const navigate = useNavigate()
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -44,31 +43,32 @@ export default function SignIn() {
 
     const data = new FormData(event.currentTarget)
     const username = data.get('username')
+    const email = data.get('email')
     const password = data.get('password')
 
-    const jsonText = `{"username": "${username}", "password": "${password}"}`
-    const user = JSON.parse(jsonText) as User
-    const formData = new FormData(event.currentTarget)
+    const jsonText = `{"username": "${username}", "email": "${email}", "password": "${password}"}`
+    const userJson = JSON.parse(jsonText) as User
 
-    formData.append('username', user.username)
-    formData.append('password', user.password)
-
-    axios({
-      method: 'post',
-      url: `/token`,
-      data: formData,
-    })
+    // API通信を行う箇所
+    const options: AxiosRequestConfig = {
+      url: `/users/`,
+      method: 'POST',
+      data: userJson,
+    }
+    axios(options)
       .then(function (res) {
-        setCookie('auth_token', res.data.access_token, 1)
-        navigate('/about')
-        alert('Success Login')
+        navigate('/')
+        // TODO: モーダルに変更する
+        alert('Successfully registered!')
       })
       .catch(function (error) {
         alert(error)
+        console.log(error)
         console.log({ errorRes: error.response })
       })
   }
 
+  //ユーザー登録画面
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -85,7 +85,7 @@ export default function SignIn() {
             {/* <LockOutlinedIcon /> */}
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign Up
           </Typography>
           <Box
             component="form"
@@ -107,36 +107,39 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
+              id="email"
+              label="Email"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
               id="password"
+              label="Password"
+              name="password"
+              type="password"
               autoComplete="current-password"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            <Grid item>
+              <Link href="/" variant="body2">
+                Login
+              </Link>
+            </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Sign Up
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/user-regst/" variant="body2">
-                  Don't have an account? Sign Up
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />

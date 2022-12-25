@@ -22,6 +22,10 @@ docker-compose up -d
 yarn start PORT=3000
 ```
 
+## AWS Deploy
+
+ref: [Deploy a React-based single-page application to Amazon S3 and CloudFront](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/deploy-a-react-based-single-page-application-to-amazon-s3-and-cloudfront.html)
+
 ## 📓 note
 
 - Look log

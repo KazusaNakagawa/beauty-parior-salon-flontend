@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 
 Description: >
   Creates the infrastructure to host and expose a Single Page Application:
@@ -12,7 +12,7 @@ Parameters: {}
 Resources:
   # Our simple CORS compliant REST API
   SimpleAPI:
-    Type: 'AWS::ApiGateway::RestApi'
+    Type: "AWS::ApiGateway::RestApi"
     Properties:
       Description: A simple CORS compliant API
       Name: SimpleAPI
@@ -22,9 +22,9 @@ Resources:
 
   # The Resource (/hello) of our API
   SimpleAPIResource:
-    Type: 'AWS::ApiGateway::Resource'
+    Type: "AWS::ApiGateway::Resource"
     Properties:
-      ParentId: !GetAtt 
+      ParentId: !GetAtt
         - SimpleAPI
         - RootResourceId
       PathPart: hello
@@ -32,7 +32,7 @@ Resources:
 
   # The method to call (GET) for our API
   HelloAPIGETMethod:
-    Type: 'AWS::ApiGateway::Method'
+    Type: "AWS::ApiGateway::Method"
     #checkov:skip=CKV_AWS_59: "This API does not expose backend service"
     Properties:
       ApiKeyRequired: false
@@ -47,9 +47,9 @@ Resources:
           - StatusCode: 200
             SelectionPattern: 200
             ResponseParameters:
-              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Origin: "'*'"
             ResponseTemplates:
-              application/json: "{\"message\": \"Hello World!\"}"
+              application/json: '{"message": "Hello World!"}'
       MethodResponses:
         - StatusCode: 200
           ResponseParameters:
@@ -61,7 +61,7 @@ Resources:
 
   # A deployment resource for deploying our API
   Deployment:
-    Type: 'AWS::ApiGateway::Deployment'
+    Type: "AWS::ApiGateway::Deployment"
     DependsOn:
       - HelloAPIGETMethod
     Properties:
@@ -70,14 +70,14 @@ Resources:
 
   # The Amazon S3 bucket into which our Single Page Application build files must be deployed
   S3Bucket:
-    Type: 'AWS::S3::Bucket'
+    Type: "AWS::S3::Bucket"
     Properties:
-      BucketName: !Sub 'beauty-parlor-salon-${SimpleAPI}'
+      BucketName: !Sub "beauty-parlor-salon-${SimpleAPI}"
       PublicAccessBlockConfiguration:
-        BlockPublicAcls : true
-        BlockPublicPolicy : true
-        IgnorePublicAcls : true
-        RestrictPublicBuckets : true
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
       LoggingConfiguration:
         DestinationBucketName: !Ref LoggingBucket
         LogFilePrefix: s3-access-logs
@@ -85,12 +85,12 @@ Resources:
         Status: Enabled
       BucketEncryption:
         ServerSideEncryptionConfiguration:
-        - ServerSideEncryptionByDefault:
-            SSEAlgorithm: 'AES256'
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: "AES256"
 
   # The Amazon S3 bucket policy for securing the bucket hosting the application
   BucketPolicy:
-    Type: 'AWS::S3::BucketPolicy'
+    Type: "AWS::S3::BucketPolicy"
     Properties:
       PolicyDocument:
         Id: MyPolicy
@@ -100,10 +100,10 @@ Resources:
             Effect: Allow
             Principal:
               CanonicalUser: !GetAtt CFOriginAccessIdentity.S3CanonicalUserId
-            Action: 's3:GetObject*'
-            Resource: !Join 
-              - ''
-              - - 'arn:aws:s3:::'
+            Action: "s3:GetObject*"
+            Resource: !Join
+              - ""
+              - - "arn:aws:s3:::"
                 - !Ref S3Bucket
                 - /*
       Bucket: !Ref S3Bucket
@@ -111,43 +111,43 @@ Resources:
   # The Amazon S3 bucket into which access logs from S3 (for the application) and CloudFront will be put
   LoggingBucket:
     #checkov:skip=CKV_AWS_18: "This bucket is private and only for storing logs"
-    Type: 'AWS::S3::Bucket'
+    Type: "AWS::S3::Bucket"
     Properties:
-      BucketName: !Sub 'beauty-parlor-salon-${SimpleAPI}-logs'
+      BucketName: !Sub "beauty-parlor-salon-${SimpleAPI}-logs"
       PublicAccessBlockConfiguration:
-        BlockPublicAcls : true
-        BlockPublicPolicy : true
-        IgnorePublicAcls : true
-        RestrictPublicBuckets : true
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
       AccessControl: LogDeliveryWrite
       VersioningConfiguration:
         Status: Enabled
       BucketEncryption:
         ServerSideEncryptionConfiguration:
-        - ServerSideEncryptionByDefault:
-            SSEAlgorithm: 'AES256'
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: "AES256"
     DeletionPolicy: Delete
 
   # The Amazon CloudFront distribution exposing our Single Page Application
   CFDistribution:
     #checkov:skip=CKV_AWS_68: "For demo purposes and to reduce cost, no WAF is configured"
-    Type: 'AWS::CloudFront::Distribution'
+    Type: "AWS::CloudFront::Distribution"
     DependsOn:
       - CFOriginAccessIdentity
     Properties:
       DistributionConfig:
         Origins:
-        - DomainName: !GetAtt S3Bucket.RegionalDomainName
-          Id: myS3Origin
-          S3OriginConfig:
-            OriginAccessIdentity: !Sub "origin-access-identity/cloudfront/${CFOriginAccessIdentity}"
-        Enabled: 'true'
+          - DomainName: !GetAtt S3Bucket.RegionalDomainName
+            Id: myS3Origin
+            S3OriginConfig:
+              OriginAccessIdentity: !Sub "origin-access-identity/cloudfront/${CFOriginAccessIdentity}"
+        Enabled: "true"
         DefaultRootObject: index.html
         DefaultCacheBehavior:
           AllowedMethods:
-          - GET
-          - HEAD
-          - OPTIONS
+            - GET
+            - HEAD
+            - OPTIONS
           TargetOriginId: myS3Origin
           CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6 # CachingOptimized
           OriginRequestPolicyId: 88a5eaf4-2fd4-4709-b370-b4c650ea3fcf # CORS-S3Origin
@@ -155,19 +155,19 @@ Resources:
         PriceClass: PriceClass_All
         Logging:
           Bucket: !GetAtt LoggingBucket.RegionalDomainName
-          Prefix: 'cloudfront-access-logs'
+          Prefix: "cloudfront-access-logs"
         ViewerCertificate:
           CloudFrontDefaultCertificate: true
-          MinimumProtocolVersion: 'TLSv1.2_2021'
+          MinimumProtocolVersion: "TLSv1.2_2021"
 
   # The Amazon CloudFront origin access identity
   CFOriginAccessIdentity:
-    Type: 'AWS::CloudFront::CloudFrontOriginAccessIdentity'
+    Type: "AWS::CloudFront::CloudFrontOriginAccessIdentity"
     DependsOn:
       - S3Bucket
     Properties:
       CloudFrontOriginAccessIdentityConfig:
-        Comment: !Sub 'access-identity-beauty-parlor-salon-${SimpleAPI}'
+        Comment: !Sub "access-identity-beauty-parlor-salon-${SimpleAPI}"
 
 Outputs:
   APIEndpoint:

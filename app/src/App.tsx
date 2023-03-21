@@ -8,6 +8,7 @@ import SignIn from './components/pages/Signin'
 import UserRegst from './components/pages/UserRegst'
 import { useFetch } from 'react-async'
 import UserIndexTable from './components/pages/UserIndexTable'
+import ClippedDrawer from './components/pages/ClippedDrawer'
 
 // To be replaced by the endpoint of the API deployed through the CloudFormation Template
 const APIEndPoint = 'http://xxxxx.execute-api.ap-northeast-1.amazonaws.com/v1'
@@ -24,6 +25,7 @@ function App() {
             element={<Dashboard name={<UserIndexTable />} barName="Users" />}
           />
           <Route path="/setting" element={<Dashboard barName="Setting" />} />
+          <Route path="/clipped" element={<ClippedDrawer />} />
           <Route path="/user-regst/" element={<UserRegst />} />
         </Routes>
       </>

@@ -7,7 +7,7 @@ import CardHeader from '@mui/material/CardHeader'
 import CardMedia from '@mui/material/CardMedia'
 import EmailIcon from '@mui/icons-material/Email'
 import Grid from '@mui/material/Grid'
-import IconButton, { IconButtonProps } from '@mui/material/IconButton'
+import IconButton from '@mui/material/IconButton'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
@@ -15,7 +15,6 @@ import { useNavigate } from 'react-router-dom'
 import '../../App.css'
 import axios from '../../config/axios'
 import GridItem from '../modules/GridItem'
-import Title from '../modules/Title'
 import User from '../models/User'
 import CheckCookie from '../modules/CheckCookie'
 
@@ -52,7 +51,6 @@ export default function UserIndex() {
 
   return (
     <div>
-      <Title>User Index</Title>
       <Stack spacing={2}>
         <Grid container spacing={2}>
           {users.map(({ id, username, email }) => (

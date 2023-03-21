@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import axios from '../../config/axios'
+import { Box } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import Link from '@material-ui/core/Link'
 import Table from '@material-ui/core/Table'
@@ -6,11 +9,8 @@ import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
-import Title from '../modules/Title'
-import { Box } from '@mui/material'
 import User from '../models/User'
-
-const url = 'http://0.0.0.0:8000'
+import CheckCookie from '../modules/CheckCookie'
 
 function preventDefault(event: any) {
   event.preventDefault()
@@ -25,27 +25,40 @@ const useStyles = makeStyles((theme) => ({
 export default function UserIndex() {
   // State処理
   const [users, setUsers] = useState<User[]>([])
+  const checkCookie = CheckCookie()
+  const navigate = useNavigate()
+  const accessToken = checkCookie('auth_token', 'Please Again Login', '/about')
 
-  // API通信を行う箇所
-  // https://www.freecodecamp.org/news/fetch-data-react/
   useEffect(() => {
-    getUser()
-  }, [])
-
-  async function getUser() {
-    await fetch(`${url}/users`, { method: 'GET' })
-      .then((res) => res.json())
-      .then((data) => {
-        setUsers(data)
+    /*
+      API communication handling
+      Ref: https://www.freecodecamp.org/news/fetch-data-react/
+      
+      curl -X 'GET' \
+        'http://localhost:8000/users/?skip=0&limit=100' \
+        -H 'accept: application/json' \
+        -H 'Authorization: Bearer xxx ...'
+    */
+    axios
+      .get(`/users/`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
       })
-  }
+      .then((res) => {
+        setUsers(res.data)
+      })
+      .catch(function (err) {
+        alert(err)
+        navigate('/')
+      })
+  }, [accessToken, navigate])
 
   const classes = useStyles()
 
   //ユーザー情報を表示する箇所
   return (
     <React.Fragment>
-      <Title>User Index</Title>
       <Box
         sx={{
           display: 'flex',

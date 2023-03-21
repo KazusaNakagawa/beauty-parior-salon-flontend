@@ -6,12 +6,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Dashboard from './components/modules/Dashboard'
 import SignIn from './components/pages/Signin'
 import UserRegst from './components/pages/UserRegst'
-import UserIndex from './components/pages/UserIndex'
 import { useFetch } from 'react-async'
+import UserIndexTable from './components/pages/UserIndexTable'
 
 // To be replaced by the endpoint of the API deployed through the CloudFormation Template
 const APIEndPoint =
   'http://xxxxx.execute-api.ap-northeast-1.amazonaws.com/v1'
+
 
 function App() {
   return (
@@ -19,8 +20,12 @@ function App() {
       <>
         <Routes>
           <Route path="/" element={<SignIn />} />
-          <Route path="/about" element={<Dashboard name={<UserIndex />} />} />
-          <Route path="/setting" element={<Dashboard />} />
+          <Route path="/about" element={<Dashboard barName="Dash Board" />} />
+          <Route
+            path="/users"
+            element={<Dashboard name={<UserIndexTable />} barName="Users" />}
+          />
+          <Route path="/setting" element={<Dashboard barName="Setting" />} />
           <Route path="/user-regst/" element={<UserRegst />} />
         </Routes>
       </>

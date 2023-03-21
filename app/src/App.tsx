@@ -15,18 +15,16 @@ const APIEndPoint =
 
 function App() {
   return (
-    <div className="App">
-      {APIEndPoint.startsWith('http') && <APIResult />}
-      <BrowserRouter>
-        <>
-          <Routes>
-            <Route path="/" element={<SignIn />} />
-            <Route path="/about" element={<Dashboard name={<UserIndex />} />} />
-            <Route path="/user-regst/" element={<UserRegst />} />
-          </Routes>
-        </>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <>
+        <Routes>
+          <Route path="/" element={<SignIn />} />
+          <Route path="/about" element={<Dashboard name={<UserIndex />} />} />
+          <Route path="/setting" element={<Dashboard />} />
+          <Route path="/user-regst/" element={<UserRegst />} />
+        </Routes>
+      </>
+    </BrowserRouter>
   )
 }
 

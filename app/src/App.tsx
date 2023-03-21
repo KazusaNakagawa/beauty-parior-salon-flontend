@@ -10,9 +10,7 @@ import { useFetch } from 'react-async'
 import UserIndexTable from './components/pages/UserIndexTable'
 
 // To be replaced by the endpoint of the API deployed through the CloudFormation Template
-const APIEndPoint =
-  'http://xxxxx.execute-api.ap-northeast-1.amazonaws.com/v1'
-
+const APIEndPoint = 'http://xxxxx.execute-api.ap-northeast-1.amazonaws.com/v1'
 
 function App() {
   return (

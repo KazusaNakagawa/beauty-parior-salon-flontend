@@ -102,6 +102,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function DashboardBar(props: any) {
+  const barName = props.name
   const classes = useStyles()
   const navigate = useNavigate()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -158,7 +159,7 @@ export default function DashboardBar(props: any) {
             noWrap
             className={classes.title}
           >
-            Dashboard
+            {barName}
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={5} color="secondary">

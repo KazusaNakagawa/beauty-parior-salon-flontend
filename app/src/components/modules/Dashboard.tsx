@@ -112,11 +112,12 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard(props: any) {
   const classes = useStyles()
   const element = <MainView name={props.name} />
+  const barName = props.barName
 
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <DashboardBar />
+      <DashboardBar name={barName} />
       <main className={classes.content}>
         {/* ここに各種ページ内容を埋め込む */}
         <Container maxWidth="lg" className={classes.container}>

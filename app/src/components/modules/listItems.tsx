@@ -42,6 +42,22 @@ export const mainListItems = (
         <ListItemText primary="Clipped" />
       </ListItem>
     </Link>
+    <Link to="/form">
+      <ListItem button>
+        <ListItemIcon>
+          <AssignmentIcon />
+        </ListItemIcon>
+        <ListItemText primary="Form" />
+      </ListItem>
+    </Link>
+    <Link to="/docs-article">
+      <ListItem button>
+        <ListItemIcon>
+          <AssignmentIcon />
+        </ListItemIcon>
+        <ListItemText primary="Article" />
+      </ListItem>
+    </Link>
   </div>
 )
 

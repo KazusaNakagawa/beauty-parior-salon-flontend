@@ -1,4 +1,4 @@
-export default function SetCookie() {
+export function SetCookie() {
   /* Set Cookie
    Ref: 
      https://www.w3schools.com/js/js_cookies.asp#:~:text=a%20cookie%20value-,A%20Function%20to%20Set%20a%20Cookie,-First%2C%20we%20create

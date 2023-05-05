@@ -9,8 +9,8 @@ import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
-import User from '../models/User'
-import CheckCookie from '../modules/CheckCookie'
+import { User } from '../models/User'
+import { CheckCookie } from '../modules/CheckCookie'
 
 function preventDefault(event: any) {
   event.preventDefault()
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function UserIndex() {
+export function UserIndexTable() {
   // State処理
   const [users, setUsers] = useState<User[]>([])
   const checkCookie = CheckCookie()

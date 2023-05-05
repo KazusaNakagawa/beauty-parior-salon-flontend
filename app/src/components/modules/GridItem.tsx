@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography'
 
 import '../../App.css'
 
-export default function GridItem(props: any) {
+export function GridItem(props: any) {
   return (
     <Grid container spacing={0}>
       <Grid item xs={1}>

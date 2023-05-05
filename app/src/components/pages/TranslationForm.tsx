@@ -11,7 +11,7 @@ import {
   Button,
 } from '@material-ui/core'
 import { Language as LanguageIcon } from '@material-ui/icons'
-import Header from '../modules/TopHeader'
+import { DrawerAppBar } from '../modules/TopHeader'
 
 type TranslationResponse = {
   result: string
@@ -21,7 +21,7 @@ type TranslationFormProps = {
   apiKey: string
 }
 
-const TranslationForm: React.FC<TranslationFormProps> = ({ apiKey }) => {
+export const TranslationForm: React.FC<TranslationFormProps> = ({ apiKey }) => {
   const [sourceText, setSourceText] = useState('')
   const [targetText, setTargetText] = useState('')
   const [sourceLang, setSourceLang] = useState('en')
@@ -49,7 +49,7 @@ const TranslationForm: React.FC<TranslationFormProps> = ({ apiKey }) => {
 
   return (
     <>
-      <Header />
+      <DrawerAppBar />
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Paper elevation={3}>
@@ -129,5 +129,3 @@ const TranslationForm: React.FC<TranslationFormProps> = ({ apiKey }) => {
     </>
   )
 }
-
-export default TranslationForm

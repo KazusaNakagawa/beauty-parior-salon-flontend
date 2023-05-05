@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import Link from '@material-ui/core/Link'
 // My modules
-import DashboardBar from './DashboardBar'
+import { DashboardBar } from './DashboardBar'
 
 function MainView(props: any) {
   return (
@@ -109,7 +109,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Dashboard(props: any) {
+export function Dashboard(props: any) {
   const classes = useStyles()
   const element = <MainView name={props.name} />
   const barName = props.barName

@@ -14,11 +14,11 @@ import Typography from '@mui/material/Typography'
 import { useNavigate } from 'react-router-dom'
 import '../../App.css'
 import axios from '../../config/axios'
-import GridItem from '../modules/GridItem'
-import User from '../models/User'
-import CheckCookie from '../modules/CheckCookie'
+import { GridItem } from '../modules/GridItem'
+import { User } from '../models/User'
+import { CheckCookie } from '../modules/CheckCookie'
 
-export default function UserIndex() {
+export function UserIndex() {
   const [users, setUsers] = useState<User[]>([])
   const checkCookie = CheckCookie()
   const navigate = useNavigate()

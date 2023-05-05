@@ -15,7 +15,7 @@ import MailIcon from '@mui/icons-material/Mail'
 
 const drawerWidth = 240
 
-export default function ClippedDrawer() {
+export function ClippedDrawer() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />

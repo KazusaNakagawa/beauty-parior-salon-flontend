@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-export default function CheckCookie() {
+export function CheckCookie() {
   /*
     Checks and retrieves the value of the specified cookie name
   */

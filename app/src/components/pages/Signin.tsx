@@ -12,8 +12,8 @@ import Typography from '@mui/material/Typography'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom'
 import axios from '../../config/axios'
-import User from '../models/User'
-import SetCookie from '../modules/SetCookie'
+import { User } from '../models/User'
+import { SetCookie } from '../modules/SetCookie'
 
 // ref: https://github.com/mui/material-ui/blob/v5.5.2/docs/data/material/getting-started/templates/sign-in/SignIn.tsx
 function Copyright(props: any) {
@@ -35,7 +35,7 @@ function Copyright(props: any) {
 }
 const theme = createTheme()
 
-export default function SignIn() {
+export function SignIn() {
   const setCookie = SetCookie()
   const navigate = useNavigate()
 

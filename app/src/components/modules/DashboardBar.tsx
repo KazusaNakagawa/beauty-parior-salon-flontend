@@ -101,7 +101,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function DashboardBar(props: any) {
+export function DashboardBar(props: any) {
   const barName = props.name
   const classes = useStyles()
   const navigate = useNavigate()

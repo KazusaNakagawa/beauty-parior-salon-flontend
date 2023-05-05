@@ -13,7 +13,7 @@ import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom'
-import User from '../models/User'
+import { User } from '../models/User'
 
 function Copyright(props: any) {
   return (
@@ -35,7 +35,7 @@ function Copyright(props: any) {
 
 const theme = createTheme()
 
-export default function Registration() {
+export function UserRegst() {
   const navigate = useNavigate()
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

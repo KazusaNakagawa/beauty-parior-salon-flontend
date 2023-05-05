@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Typography, List, ListItem, Link } from '@mui/material'
-import Header from '../modules/TopHeader'
+import { DrawerAppBar } from '../modules/TopHeader'
 import { makeStyles } from '@material-ui/core/styles'
 
 /** NOTE:
@@ -42,7 +42,7 @@ const handleSectionClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
   }
 }
 
-const SamplePage: React.FC = () => {
+export const DocsArticle: React.FC = () => {
   const [sections, setSections] = useState<Section[]>([])
   const classes = useStyles()
 
@@ -63,7 +63,7 @@ const SamplePage: React.FC = () => {
 
   return (
     <>
-      <Header />
+      <DrawerAppBar />
       <div style={{ display: 'flex' }}>
         <div className={classes.root}>
           <List>
@@ -199,5 +199,3 @@ dolores sunt inventore perferendis, aut sapiente modi nesciunt.
     </>
   )
 }
-
-export default SamplePage

@@ -25,7 +25,7 @@ interface Props {
 const drawerWidth = 240
 const navItems = ['Home', 'About', 'Contact']
 
-export default function DrawerAppBar(props: Props) {
+export function DrawerAppBar(props: Props) {
   const { window } = props
   const [mobileOpen, setMobileOpen] = React.useState(false)
 

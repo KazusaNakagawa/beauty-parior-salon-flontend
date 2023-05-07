@@ -1,0 +1,7 @@
+{
+  "lastId": 2,
+  "users": [
+    { "id": 1, "name": "Tom", "email": "tom@example.com" },
+    { "id": 2, "name": "Tom2", "email": "tom@example2.com" }
+  ]
+}
